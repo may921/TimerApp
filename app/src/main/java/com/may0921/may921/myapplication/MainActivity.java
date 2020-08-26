@@ -1,15 +1,13 @@
 package com.may0921.may921.myapplication;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Button;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.Locale;
 
 
@@ -51,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         getmButtonReset.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                reset Timer();
+                resetTimer();
             }
 
         });
@@ -80,9 +78,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void pauseTimer(){
+        System.out.println("一時停止処理前：" + mTimerRunning);
+        mCountDownTimer.cancel();
+        mTimerRunning = false;
+        System.out.println("一時停止処理後：" + mTimerRunning);
+        mButtonStartPause.setText("スタート");
+        getmButtonReset.setVisibility(View.VISIBLE);
+
     }
 
     private void resetTimer(){
+        mTimeLeftInMillis = START_TIME;
+        updateCountDownText();
+        mButtonStartPause.setVisibility(View.VISIBLE);
+        getmButtonReset.setVisibility(View.INVISIBLE);
     }
 
     private void updateCountDownText(){
